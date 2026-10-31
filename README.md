@@ -7,7 +7,7 @@
     <img src="https://raw.githubusercontent.com/kenan-karimli/myPhone/main/app/test/goldens/phone_chat_dark.png" alt="Watch the myPhone demo" width="850">
   </a>
   <br>
-  <a href="https://i.imgur.com/BMwoIvc.mp4"><strong>▶ Watch the full myPhone demo</strong></a>
+  <a href="https://i.imgur.com/YixWL0l.gif"><strong>▶ Watch the full myPhone demo</strong></a>
 </p>
 
 <p align="center">
