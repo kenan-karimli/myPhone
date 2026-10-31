@@ -27,6 +27,9 @@
 
 ---
 
+![myPhone Demo](./myPhone Demo v2.gif)
+
+
 ## Overview
 
 myPhone connects your Android phone and desktop as trusted devices on your own tailnet. It combines a lightweight messenger with practical remote-device tools, keeping communication and device access within your private network rather than relying on a hosted messaging service.
