@@ -7,10 +7,6 @@
 </p>
 
 <p align="center">
-  <a href="https://i.imgur.com/BMwoIvc.mp4"><strong>▶ Watch the full demo video</strong></a>
-</p>
-
-<p align="center">
   <a href="#features">Features</a> ·
   <a href="#architecture">Architecture</a> ·
   <a href="#getting-started">Getting started</a> ·
