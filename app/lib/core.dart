@@ -10,6 +10,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:phone_native/phone_native.dart';
 
 import 'agents.dart';
+import 'assistant.dart';
 import 'battery.dart';
 import 'clipboard.dart';
 import 'mirror.dart';
@@ -29,6 +30,7 @@ String? visibleAgent; // agent session on screen (no alert for it)
 AgentHost? agentHost;
 ScreenHost? screenHost;
 MirrorHost? mirrorHost;
+Assistant? assistant;
 
 /// Agent notification taps ask the UI to open (device id, session id).
 final openAgentRequests = StreamController<(String, String)>.broadcast();
@@ -145,11 +147,16 @@ Future<void> applyBackgroundMode() async {
         });
       }
       if (isDesktop) screenHost ??= ScreenHost(store);
+      if (isDesktop && assistant == null) {
+        assistant = Assistant(store, agentHost!, client, await dataDir());
+        assistant!.setup().catchError((_) {});
+      }
       if (isDesktop && mirrorHost == null) {
         mirrorHost = MirrorHost(store);
         mirrorHost!.start().catchError((_) => mirrorHost = null);
       }
-      node = Node(store, saveDir: saveDir, onShare: shareRequests.add, extraRoutes: !isDesktop ? null : (req, from) async => await agentHost!.handle(req, from) || await screenHost!.handle(req, from), onIncoming: (d, m) {
+      node = Node(store, saveDir: saveDir, onShare: shareRequests.add, extraRoutes: !isDesktop ? null : (req, from) async => await agentHost!.handle(req, from) || await screenHost!.handle(req, from), localRoutes: assistant?.handleLocal, onIncoming: (d, m) {
+        if (m != null) assistant?.onMessage(d, m);
         if (m != null && (!appForeground || visibleChat != d.id)) notify(store, d, m);
       }, onAgent: (d, ev) {
         if (ev['t'] == 'clip') {

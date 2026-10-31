@@ -591,6 +591,8 @@ class _MsgTileState extends State<MsgTile> {
               ),
             ),
           ),
+        if (m.by == 'claude')
+          Tooltip(message: 'Sent by Claude', child: Padding(padding: const EdgeInsets.only(right: 5), child: MpIcon('assistant', size: 13, stroke: 1.8, color: c.text2))),
         AnimatedSwitcher(duration: Motion.d(200), child: Text(meta, key: ValueKey(meta), style: mpStyle(context, size: MpText.meta, color: c.text2))),
       ]),
     );

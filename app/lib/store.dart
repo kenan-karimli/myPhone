@@ -19,13 +19,14 @@ class Msg {
   final String text, name, path;
   final int size, ts;
   final Map? replyTo; // {who, text}
+  final String by; // '' = the person; 'claude' = written/sent by Claude
   final Map<String, Set<String>> reacts = {}; // emoji -> {'me','them'}
   String status; // pending | sent (mine only)
   double? progress; // in-memory, while a file uploads
-  Msg({required this.id, required this.kind, required this.mine, this.text = '', this.name = '', this.path = '', this.size = 0, required this.ts, this.replyTo, this.status = 'sent'});
+  Msg({required this.id, required this.kind, required this.mine, this.text = '', this.name = '', this.path = '', this.size = 0, required this.ts, this.replyTo, this.status = 'sent', this.by = ''});
 
-  Map<String, dynamic> toJson() => {'t': 'msg', 'id': id, 'kind': kind, 'mine': mine, 'text': text, 'name': name, 'path': path, 'size': size, 'ts': ts, if (replyTo != null) 'replyTo': replyTo, 'status': status};
-  factory Msg.fromJson(Map j) => Msg(id: j['id'], kind: j['kind'] ?? 'text', mine: j['mine'] == true, text: j['text'] ?? '', name: j['name'] ?? '', path: j['path'] ?? '', size: j['size'] ?? 0, ts: j['ts'] ?? 0, replyTo: j['replyTo'], status: j['status'] ?? 'sent');
+  Map<String, dynamic> toJson() => {'t': 'msg', 'id': id, 'kind': kind, 'mine': mine, 'text': text, 'name': name, 'path': path, 'size': size, 'ts': ts, if (replyTo != null) 'replyTo': replyTo, 'status': status, if (by.isNotEmpty) 'by': by};
+  factory Msg.fromJson(Map j) => Msg(id: j['id'], kind: j['kind'] ?? 'text', mine: j['mine'] == true, text: j['text'] ?? '', name: j['name'] ?? '', path: j['path'] ?? '', size: j['size'] ?? 0, ts: j['ts'] ?? 0, replyTo: j['replyTo'], status: j['status'] ?? 'sent', by: j['by'] ?? '');
 
   String get preview => kind == 'text' ? text : kind == 'image' ? 'Photo · $name' : name;
 }

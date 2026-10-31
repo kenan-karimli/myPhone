@@ -30,9 +30,10 @@ class Node {
   final void Function(Device dev, Msg? msg) onIncoming;
   final void Function(List<String> paths)? onShare; // desktop "Send via myPhone"
   final Future<bool> Function(HttpRequest req, Device from)? extraRoutes; // PC: Claude agents
+  final Future<bool> Function(HttpRequest req)? localRoutes; // loopback only: tools on this machine
   final void Function(Device from, Map event)? onAgent; // phone: agent alerts
   HttpServer? _server;
-  Node(this.store, {required this.saveDir, required this.onIncoming, this.onShare, this.extraRoutes, this.onAgent});
+  Node(this.store, {required this.saveDir, required this.onIncoming, this.onShare, this.extraRoutes, this.onAgent, this.localRoutes});
 
   Future<void> start({int listenPort = port}) async {
     _server = await HttpServer.bind(InternetAddress.anyIPv6, listenPort, v6Only: false);
@@ -59,6 +60,10 @@ class Node {
         }
         final paths = const LineSplitter().convert(await utf8.decodeStream(req)).where((p) => p.isNotEmpty && FileSystemEntity.isFileSync(p)).toList();
         if (paths.isNotEmpty) onShare!(paths);
+        return;
+      }
+      if (path.startsWith('/local/')) {
+        if (!InternetAddress(_ip(remote)).isLoopback || localRoutes == null || !await localRoutes!(req)) res.statusCode = 403;
         return;
       }
       if (req.method == 'POST' && path == '/hello') {
@@ -108,7 +113,7 @@ class Node {
         }
         final dest = await _unique(dir, name);
         await tmp.rename(dest.path);
-        final m = Msg(id: id, kind: kindForFile(name), mine: false, name: name, path: dest.path, size: await dest.length(), ts: int.tryParse(q['ts'] ?? '') ?? DateTime.now().millisecondsSinceEpoch, replyTo: q['reply'] != null ? jsonDecode(q['reply']!) : null);
+        final m = Msg(id: id, kind: kindForFile(name), mine: false, name: name, path: dest.path, size: await dest.length(), ts: int.tryParse(q['ts'] ?? '') ?? DateTime.now().millisecondsSinceEpoch, replyTo: q['reply'] != null ? jsonDecode(q['reply']!) : null, by: q['by'] ?? '');
         await store.addMsg(dev.id, m);
         onIncoming(dev, m);
       } else {
@@ -127,7 +132,7 @@ class Node {
     switch (ev['t']) {
       case 'msg':
         if (store.hasMsg(dev.id, ev['id'])) return;
-        final m = Msg(id: ev['id'], kind: 'text', mine: false, text: ev['text'] ?? '', ts: ev['ts'] ?? DateTime.now().millisecondsSinceEpoch, replyTo: ev['replyTo']);
+        final m = Msg(id: ev['id'], kind: 'text', mine: false, text: ev['text'] ?? '', ts: ev['ts'] ?? DateTime.now().millisecondsSinceEpoch, replyTo: ev['replyTo'], by: ev['by'] ?? '');
         await store.addMsg(dev.id, m);
         onIncoming(dev, m);
       case 'agent' || 'mirror' || 'clip' || 'ring':
@@ -200,7 +205,7 @@ class Client {
   Future<void> _put(Device d, Msg m) => _try(d, (h) async {
         final f = File(m.path);
         final len = await f.length();
-        final req = await _http.openUrl('PUT', _url(h, '/file', {'id': m.id, 'name': m.name, 'size': '$len', 'ts': '${m.ts}', if (m.replyTo != null) 'reply': jsonEncode(m.replyTo)}));
+        final req = await _http.openUrl('PUT', _url(h, '/file', {'id': m.id, 'name': m.name, 'size': '$len', 'ts': '${m.ts}', if (m.replyTo != null) 'reply': jsonEncode(m.replyTo), if (m.by.isNotEmpty) 'by': m.by}));
         req.headers.set('x-from', store.myId);
         req.contentLength = len;
         var sent = 0, lastPaint = 0;
@@ -292,7 +297,7 @@ class Client {
     if (!_inFlight.add(m.id)) return false;
     try {
       if (m.kind == 'text') {
-        await _post(d, {'t': 'msg', 'id': m.id, 'text': m.text, 'ts': m.ts, if (m.replyTo != null) 'replyTo': m.replyTo});
+        await _post(d, {'t': 'msg', 'id': m.id, 'text': m.text, 'ts': m.ts, if (m.replyTo != null) 'replyTo': m.replyTo, if (m.by.isNotEmpty) 'by': m.by});
       } else {
         await _put(d, m);
       }
@@ -309,16 +314,16 @@ class Client {
     }
   }
 
-  Future<Msg> sendText(Device d, String text, {Map? replyTo}) async {
-    final m = Msg(id: newId(), kind: 'text', mine: true, text: text, ts: DateTime.now().millisecondsSinceEpoch, replyTo: replyTo, status: 'pending');
+  Future<Msg> sendText(Device d, String text, {Map? replyTo, String by = ''}) async {
+    final m = Msg(id: newId(), kind: 'text', mine: true, text: text, ts: DateTime.now().millisecondsSinceEpoch, replyTo: replyTo, status: 'pending', by: by);
     await store.addMsg(d.id, m);
     unawaited(deliver(d, m));
     return m;
   }
 
-  Future<Msg> sendFile(Device d, String path, {Map? replyTo}) async {
+  Future<Msg> sendFile(Device d, String path, {Map? replyTo, String by = ''}) async {
     final name = path.split(Platform.pathSeparator).last;
-    final m = Msg(id: newId(), kind: kindForFile(name), mine: true, name: name, path: path, size: await File(path).length(), ts: DateTime.now().millisecondsSinceEpoch, replyTo: replyTo, status: 'pending')..progress = 0;
+    final m = Msg(id: newId(), kind: kindForFile(name), mine: true, name: name, path: path, size: await File(path).length(), ts: DateTime.now().millisecondsSinceEpoch, replyTo: replyTo, status: 'pending', by: by)..progress = 0;
     await store.addMsg(d.id, m);
     unawaited(deliver(d, m));
     return m;

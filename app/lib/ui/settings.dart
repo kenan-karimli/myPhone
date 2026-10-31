@@ -182,6 +182,13 @@ class _SettingsViewState extends State<SettingsView> {
           ]),
           const SectionLabel('Remote access'),
           card([
+            row('Claude answers my devices', sub: 'Text this PC from your phone (“send me the DSA deck”) and Claude does it. Stays silent when nothing is needed. Its messages show a ✦.', trailing: MpSwitch(store.get('assistant', true), (v) => store.set('assistant', v))),
+            row('Claude model', below: MpSegmented(items: const [('haiku', 'Haiku'), ('sonnet', 'Sonnet'), ('opus', 'Opus')], value: store.get('assistantModel', 'sonnet'), onChanged: (v) => store.set('assistantModel', v))),
+            row('Instructions', sub: 'AGENT.md for this PC, plus one file per device in agents/', trailing: PillButton('Open', solid: false, height: 36, onTap: () async {
+              final d = await dataDir();
+              await assistant?.setup();
+              Process.run('xdg-open', [d.path]);
+            })),
             row('Allow my devices to run Claude here', sub: 'Your phone can start Claude Code sessions on this PC and approve each action. Turn off to block it completely.', trailing: MpSwitch(store.get('agentsEnabled', true), (v) => store.set('agentsEnabled', v))),
             row('Allow my phone to share its screen here', sub: 'Show and control your phone in a window on this PC.', trailing: MpSwitch(store.get('phoneControlEnabled', true), (v) => store.set('phoneControlEnabled', v))),
             row('Allow my devices to view this screen', sub: 'Live view of this PC’s screen on your phone. Only your own paired devices can connect.', trailing: MpSwitch(store.get('screenEnabled', true), (v) => store.set('screenEnabled', v))),

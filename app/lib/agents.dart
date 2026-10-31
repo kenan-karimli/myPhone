@@ -86,6 +86,10 @@ class AgentSession {
   final pending = <String, Map>{}; // request id -> can_use_tool request
   Process? proc;
   Completer<void> _changed = Completer();
+  // Assistant sessions (assistant.dart): extra CLI args/env, and the reply goes back as a chat message.
+  List<String> extraArgs = const [];
+  Map<String, String>? env;
+  void Function(String reply)? onReply;
 
   AgentSession(this.key, this.cwd, this.title, {this.sessionId});
 
@@ -278,6 +282,13 @@ class AgentHost {
     return s;
   }
 
+  /// Register a session made elsewhere (the assistant) and say something to it.
+  Future<void> sayTo(AgentSession s, String text) async {
+    sessions[s.key] = s;
+    if (s.proc == null) await _spawn(s);
+    _say(s, text);
+  }
+
   Future<void> send(String id, String text, String owner) async {
     final s = sessions[id] ?? await open(id);
     if (s == null) throw ArgumentError('Unknown session');
@@ -301,7 +312,8 @@ class AgentHost {
       '--permission-prompts', 'host', '--permission-prompt-tool', 'stdio',
       '--disallowedTools', 'AskUserQuestion', // it asks in plain text instead
       if (s.sessionId != null) ...['--resume', s.sessionId!],
-    ], workingDirectory: s.cwd);
+      ...s.extraArgs,
+    ], workingDirectory: s.cwd, environment: s.env);
     s.proc = p;
     // Must come first, or permission prompts are never sent to us.
     p.stdin.writeln(jsonEncode({'type': 'control_request', 'request_id': 'init', 'request': {'subtype': 'initialize', 'hooks': null}}));
@@ -341,6 +353,14 @@ class AgentHost {
     }
     for (final e in normalize(j)) {
       s.add(e);
+      if (e['k'] == 'result' && s.onReply != null) {
+        s.status = e['ok'] == true ? 'idle' : 'error';
+        // Claude's last words since the person's message; no "finished" alert, the chat reply is enough.
+        final lastUser = s.events.lastIndexWhere((x) => x['k'] == 'user');
+        final texts = s.events.skip(lastUser + 1).where((x) => x['k'] == 'text').map((x) => x['text'] as String).toList();
+        s.onReply!(texts.isEmpty ? '' : texts.last);
+        continue;
+      }
       if (e['k'] == 'result') {
         s.status = e['ok'] == true ? 'idle' : 'error';
         final last = s.events.lastWhere((x) => x['k'] == 'text', orElse: () => {'text': 'Finished'});
