@@ -1,17 +1,9 @@
-
-
-
-
-
-
 # myPhone
 
 **A private, cross-device companion for Android and desktop.** Chat with your own devices, move files and clipboard content between them, view screens remotely, and interact with your Android phone from your computer — over your private Tailscale network.
 
-![myPhone Demo](./myPhone Demo v2.gif)
-
 <p align="center">
-  <img src="https://i.imgur.com/YixWL0l.gif" alt="myPhone demo" width="850">
+  <img src="./myPhone%20Demo%20v2.gif" alt="myPhone Demo" width="850">
 </p>
 
 <p align="center">
@@ -26,9 +18,6 @@
 </p>
 
 ---
-
-![myPhone Demo](./myPhone Demo v2.gif)
-
 
 ## Overview
 
