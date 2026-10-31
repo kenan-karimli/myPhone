@@ -1,0 +1,16 @@
+name: phone_native
+description: Android bits myPhone needs in every Flutter engine (also the background service) - clipboard write, ring.
+version: 0.0.1
+publish_to: none
+environment:
+  sdk: ^3.0.0
+  flutter: ">=3.0.0"
+dependencies:
+  flutter:
+    sdk: flutter
+flutter:
+  plugin:
+    platforms:
+      android:
+        package: dev.kanan.phone_native
+        pluginClass: PhoneNativePlugin

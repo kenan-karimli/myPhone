@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<style>body{margin:0;background:#D6D5D0}a{color:#141414}a:hover{color:#F26B3A}</style>
+</helmet>
+<div style="font-family:'Nunito',ui-rounded,system-ui,sans-serif;color:#141414;padding:64px;display:flex;flex-direction:column;gap:96px;width:max-content">
+
+<section id="tokens" style="display:flex;flex-direction:column;gap:24px">
+  <div style="display:flex;flex-direction:column;gap:4px"><div style="font-size:13px;font-weight:700;color:#66645F">00</div><div style="font-size:32px;line-height:40px;font-weight:700">myPhone design tokens</div><div style="font-size:15px;color:#66645F;max-width:760px">Shared by desktop and mobile. Names map 1:1 to a Flutter ThemeExtension (MyPhoneTokens).</div></div>
+  <div style="width:2592px;box-sizing:border-box;display:grid;grid-template-columns:1.25fr 1fr 1fr;gap:24px;font-size:15px;line-height:22px">
+
+    <div style="background:#FAFAF8;border-radius:16px;padding:32px;display:flex;flex-direction:column;gap:16px">
+      <div style="font-size:20px;line-height:28px;font-weight:700">Colour</div>
+      <div style="display:grid;grid-template-columns:150px 1fr 1fr;gap:12px 24px;align-items:center;font-size:13px;line-height:18px">
+        <span style="color:#66645F;font-weight:600">Token</span><span style="color:#66645F;font-weight:600">Dark</span><span style="color:#66645F;font-weight:600">Light</span>
+        <span style="font-weight:700">bg</span><div style="display:flex;align-items:center;gap:10px"><div style="width:40px;height:28px;border-radius:6px;background:#111111;border:1px solid #E2E1DC"></div>#111111</div><div style="display:flex;align-items:center;gap:10px"><div style="width:40px;height:28px;border-radius:6px;background:#FAFAF8;border:1px solid #E2E1DC"></div>#FAFAF8</div>
+        <span style="font-weight:700">surface</span><div style="display:flex;align-items:center;gap:10px"><div style="width:40px;height:28px;border-radius:6px;background:#191919;border:1px solid #E2E1DC"></div>#191919</div><div style="display:flex;align-items:center;gap:10px"><div style="width:40px;height:28px;border-radius:6px;background:#F2F1EE;border:1px solid #E2E1DC"></div>#F2F1EE</div>
+        <span style="font-weight:700">raised</span><div style="display:flex;align-items:center;gap:10px"><div style="width:40px;height:28px;border-radius:6px;background:#232323;border:1px solid #E2E1DC"></div>#232323</div><div style="display:flex;align-items:center;gap:10px"><div style="width:40px;height:28px;border-radius:6px;background:#E8E7E3;border:1px solid #E2E1DC"></div>#E8E7E3</div>
+        <span style="font-weight:700">line</span><div style="display:flex;align-items:center;gap:10px"><div style="width:40px;height:28px;border-radius:6px;background:#2C2C2C;border:1px solid #E2E1DC"></div>#2C2C2C</div><div style="display:flex;align-items:center;gap:10px"><div style="width:40px;height:28px;border-radius:6px;background:#E2E1DC;border:1px solid #E2E1DC"></div>#E2E1DC</div>
+        <span style="font-weight:700">text</span><div style="display:flex;align-items:center;gap:10px"><div style="width:40px;height:28px;border-radius:6px;background:#F2F1EE;border:1px solid #E2E1DC"></div>#F2F1EE</div><div style="display:flex;align-items:center;gap:10px"><div style="width:40px;height:28px;border-radius:6px;background:#141414;border:1px solid #E2E1DC"></div>#141414</div>
+        <span style="font-weight:700">muted</span><div style="display:flex;align-items:center;gap:10px"><div style="width:40px;height:28px;border-radius:6px;background:#A3A19C;border:1px solid #E2E1DC"></div>#A3A19C</div><div style="display:flex;align-items:center;gap:10px"><div style="width:40px;height:28px;border-radius:6px;background:#66645F;border:1px solid #E2E1DC"></div>#66645F</div>
+        <span style="font-weight:700">accent</span><div style="display:flex;align-items:center;gap:10px"><div style="width:40px;height:28px;border-radius:6px;background:#F26B3A"></div>#F26B3A</div><div style="display:flex;align-items:center;gap:10px"><div style="width:40px;height:28px;border-radius:6px;background:#F26B3A"></div>#F26B3A</div>
+        <span style="font-weight:700">onAccent</span><div style="display:flex;align-items:center;gap:10px"><div style="width:40px;height:28px;border-radius:6px;background:#141414;border:1px solid #E2E1DC"></div>#141414</div><div style="display:flex;align-items:center;gap:10px"><div style="width:40px;height:28px;border-radius:6px;background:#141414;border:1px solid #E2E1DC"></div>#141414</div>
+        <span style="font-weight:700">scrim</span><span>#000000 · 55%</span><span>#141414 · 28%</span>
+        <span style="font-weight:700">overlay</span><span>bg · 92%</span><span>bg · 92%</span>
+      </div>
+      <div style="font-size:13px;line-height:18px;color:#66645F;text-wrap:pretty">Accent is used only for my bubbles, the send button and online dots. Primary buttons and unread counts use text on bg (inverted). Their bubbles use raised.</div>
+    </div>
+
+    <div style="background:#FAFAF8;border-radius:16px;padding:32px;display:flex;flex-direction:column;gap:32px">
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <div style="font-size:20px;line-height:28px;font-weight:700">Type · Nunito</div>
+        <div style="display:flex;flex-direction:column;gap:16px">
+          <div style="display:flex;align-items:baseline;gap:24px"><span style="width:110px;font-size:13px;color:#66645F">title 20/28</span><span style="font-size:20px;line-height:28px;font-weight:700">Drop to send to Pixel</span></div>
+          <div style="display:flex;align-items:baseline;gap:24px"><span style="width:110px;font-size:13px;color:#66645F">body 15/22</span><span style="font-size:15px;line-height:22px">Boarding pass for Friday</span></div>
+          <div style="display:flex;align-items:baseline;gap:24px"><span style="width:110px;font-size:13px;color:#66645F">body strong</span><span style="font-size:15px;line-height:22px;font-weight:600">Pixel</span></div>
+          <div style="display:flex;align-items:baseline;gap:24px"><span style="width:110px;font-size:13px;color:#66645F">caption 13/18</span><span style="font-size:13px;line-height:18px;color:#66645F">Seen 2h ago · 214 KB</span></div>
+        </div>
+        <div style="font-size:13px;line-height:18px;color:#66645F">Weights 400 / 600 / 700. Mobile uses the same three sizes.</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <div style="font-size:20px;line-height:28px;font-weight:700">Spacing</div>
+        <div style="display:flex;align-items:flex-end;gap:20px;font-size:13px;color:#66645F">
+          <div style="display:flex;flex-direction:column;align-items:center;gap:8px"><div style="width:4px;height:4px;background:#141414"></div>4</div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:8px"><div style="width:8px;height:8px;background:#141414"></div>8</div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:8px"><div style="width:12px;height:12px;background:#141414"></div>12</div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:8px"><div style="width:16px;height:16px;background:#141414"></div>16</div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:8px"><div style="width:24px;height:24px;background:#141414"></div>24</div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:8px"><div style="width:32px;height:32px;background:#141414"></div>32</div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:8px"><div style="width:48px;height:48px;background:#141414"></div>48</div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <div style="font-size:20px;line-height:28px;font-weight:700">Radii</div>
+        <div style="display:flex;gap:20px;font-size:13px;line-height:18px;color:#66645F">
+          <div style="display:flex;flex-direction:column;gap:8px"><div style="width:64px;height:48px;border:1.5px solid #141414;border-radius:6px"></div>sm 6</div>
+          <div style="display:flex;flex-direction:column;gap:8px"><div style="width:64px;height:48px;border:1.5px solid #141414;border-radius:10px"></div>md 10</div>
+          <div style="display:flex;flex-direction:column;gap:8px"><div style="width:64px;height:48px;border:1.5px solid #141414;border-radius:16px"></div>lg 16</div>
+          <div style="display:flex;flex-direction:column;gap:8px"><div style="width:64px;height:48px;border:1.5px solid #141414;border-radius:999px"></div>full</div>
+        </div>
+        <div style="font-size:13px;line-height:18px;color:#66645F;text-wrap:pretty">Bubbles: lg with a 6 tail corner. Overlays: 1px line border + shadow 0 8 24 at 10% (light) / 40% (dark). Hit targets ≥ 36 desktop, 44 mobile.</div>
+      </div>
+    </div>
+
+    <div style="background:#FAFAF8;border-radius:16px;padding:32px;display:flex;flex-direction:column;gap:16px">
+      <div style="font-size:20px;line-height:28px;font-weight:700">Icons · 24 grid, 1.6 stroke, round</div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;font-size:13px;line-height:18px;color:#66645F">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px;padding:16px 0;border:1px solid #E2E1DC;border-radius:10px;color:#141414"><svg viewBox="0 0 24 24" style="width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round"><rect x="7" y="2.5" width="10" height="19" rx="2.5"></rect><path d="M11 18.5h2"></path></svg><span style="color:#66645F">phone</span></div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px;padding:16px 0;border:1px solid #E2E1DC;border-radius:10px;color:#141414"><svg viewBox="0 0 24 24" style="width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round"><rect x="4" y="5" width="16" height="11" rx="1.5"></rect><path d="M2 19h20"></path></svg><span style="color:#66645F">laptop</span></div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px;padding:16px 0;border:1px solid #E2E1DC;border-radius:10px;color:#141414"><svg viewBox="0 0 24 24" style="width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round"><rect x="3" y="4" width="18" height="12" rx="1.5"></rect><path d="M9 20h6M12 16v4"></path></svg><span style="color:#66645F">desktop</span></div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px;padding:16px 0;border:1px solid #E2E1DC;border-radius:10px;color:#141414"><svg viewBox="0 0 24 24" style="width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round"><rect x="4.5" y="3" width="15" height="18" rx="2.5"></rect><path d="M11 18h2"></path></svg><span style="color:#66645F">tablet</span></div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px;padding:16px 0;border:1px solid #E2E1DC;border-radius:10px;color:#141414"><svg viewBox="0 0 24 24" style="width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round"><path d="M20 11.5l-8.2 8.2a5 5 0 01-7.1-7.1l8.5-8.5a3.3 3.3 0 014.7 4.7l-8.5 8.5a1.7 1.7 0 01-2.4-2.4l7.8-7.8"></path></svg><span style="color:#66645F">attach</span></div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px;padding:16px 0;border:1px solid #E2E1DC;border-radius:10px;color:#141414"><svg viewBox="0 0 24 24" style="width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round"><path d="M5 12h13M13 6l6 6-6 6"></path></svg><span style="color:#66645F">send</span></div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px;padding:16px 0;border:1px solid #E2E1DC;border-radius:10px;color:#141414"><svg viewBox="0 0 24 24" style="width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round"><path d="M14 3H7a2 2 0 00-2 2v14a2 2 0 002 2h10a2 2 0 002-2V8z"></path><path d="M14 3v5h5"></path></svg><span style="color:#66645F">file</span></div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px;padding:16px 0;border:1px solid #E2E1DC;border-radius:10px;color:#141414"><svg viewBox="0 0 24 24" style="width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round"><rect x="3" y="4" width="18" height="16" rx="2"></rect><circle cx="9" cy="10" r="1.6"></circle><path d="M21 16l-5-5-9 9"></path></svg><span style="color:#66645F">image</span></div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px;padding:16px 0;border:1px solid #E2E1DC;border-radius:10px;color:#141414"><svg viewBox="0 0 24 24" style="width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round"><path d="M3 7a2 2 0 012-2h4l2 2h8a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z"></path></svg><span style="color:#66645F">folder</span></div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px;padding:16px 0;border:1px solid #E2E1DC;border-radius:10px;color:#141414"><svg viewBox="0 0 24 24" style="width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round"><circle cx="12" cy="12" r="9"></circle><path d="M12 11v5M12 8h.01"></path></svg><span style="color:#66645F">info</span></div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px;padding:16px 0;border:1px solid #E2E1DC;border-radius:10px;color:#141414"><svg viewBox="0 0 24 24" style="width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round"><path d="M9 7l-5 5 5 5"></path><path d="M4 12h10a6 6 0 016 6"></path></svg><span style="color:#66645F">reply</span></div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px;padding:16px 0;border:1px solid #E2E1DC;border-radius:10px;color:#141414"><svg viewBox="0 0 24 24" style="width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round"><rect x="8" y="8" width="12" height="12" rx="2"></rect><path d="M16 8V6a2 2 0 00-2-2H6a2 2 0 00-2 2v8a2 2 0 002 2h2"></path></svg><span style="color:#66645F">copy</span></div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px;padding:16px 0;border:1px solid #E2E1DC;border-radius:10px;color:#141414"><svg viewBox="0 0 24 24" style="width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 12a2 2 0 002 2h6a2 2 0 002-2l1-12M9 7V4h6v3"></path></svg><span style="color:#66645F">delete</span></div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px;padding:16px 0;border:1px solid #E2E1DC;border-radius:10px;color:#141414"><svg viewBox="0 0 24 24" style="width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"></path></svg><span style="color:#66645F">save</span></div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px;padding:16px 0;border:1px solid #E2E1DC;border-radius:10px;color:#141414"><svg viewBox="0 0 24 24" style="width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round"><circle cx="12" cy="12" r="9"></circle><path d="M8.5 14a4 4 0 007 0M9 9.5h.01M15 9.5h.01"></path></svg><span style="color:#66645F">react</span></div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px;padding:16px 0;border:1px solid #E2E1DC;border-radius:10px;color:#141414"><svg viewBox="0 0 24 24" style="width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round"><rect x="3" y="7" width="16" height="10" rx="2"></rect><path d="M22 11v2"></path></svg><span style="color:#66645F">battery</span></div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px;padding:16px 0;border:1px solid #E2E1DC;border-radius:10px;color:#141414"><svg viewBox="0 0 24 24" style="width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"></path><circle cx="12" cy="12" r="3"></circle></svg><span style="color:#66645F">screen</span></div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px;padding:16px 0;border:1px solid #E2E1DC;border-radius:10px;color:#141414"><svg viewBox="0 0 24 24" style="width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round"><path d="M5 3l14 7-6 2-2 6z"></path></svg><span style="color:#66645F">remote</span></div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px;padding:16px 0;border:1px solid #E2E1DC;border-radius:10px;color:#141414"><svg viewBox="0 0 24 24" style="width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round"><path d="M12 3c.8 4.8 4.2 8.2 9 9-4.8.8-8.2 4.2-9 9-.8-4.8-4.2-8.2-9-9 4.8-.8 8.2-4.2 9-9z"></path></svg><span style="color:#66645F">assistant</span></div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px;padding:16px 0;border:1px solid #E2E1DC;border-radius:10px;color:#141414"><svg viewBox="0 0 24 24" style="width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round"><path d="M12 5v14M5 12h14"></path></svg><span style="color:#66645F">add</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="main" style="display:flex;flex-direction:column;gap:24px">
+  <div style="display:flex;flex-direction:column;gap:4px"><div style="font-size:13px;font-weight:700;color:#66645F">01 · 02</div><div style="font-size:32px;line-height:40px;font-weight:700">Main view and chat contents</div><div style="font-size:15px;color:#66645F">Text bubbles, received and sending file cards, image, reaction chips, reply quote, input bar. Info button opens the panel.</div></div>
+  <div style="display:flex;gap:32px">
+    <div style="display:flex;flex-direction:column;gap:12px"><div style="font-size:13px;font-weight:700">Dark</div><div style="--bg:#111111;--surface:#191919;--raised:#232323;--line:#2C2C2C;--text:#F2F1EE;--muted:#A3A19C;--accent:#F26B3A;--on-accent:#141414;--overlay:rgba(17,17,17,0.92);--scrim:rgba(0,0,0,0.55);--shadow:0 8px 24px rgba(0,0,0,0.4);--desk:#2A2A2A"><dc-import name="AppWindow" screen="main" style="width:1280px;height:800px" hint-size="1280px,800px"></dc-import></div></div>
+    <div style="display:flex;flex-direction:column;gap:12px"><div style="font-size:13px;font-weight:700">Light</div><div style="--bg:#FAFAF8;--surface:#F2F1EE;--raised:#E8E7E3;--line:#E2E1DC;--text:#141414;--muted:#66645F;--accent:#F26B3A;--on-accent:#141414;--overlay:rgba(250,250,248,0.92);--scrim:rgba(20,20,20,0.28);--shadow:0 8px 24px rgba(20,20,20,0.10);--desk:#CFCEC9"><dc-import name="AppWindow" screen="main" style="width:1280px;height:800px" hint-size="1280px,800px"></dc-import></div></div>
+  </div>
+</section>
+
+<section id="drag" style="display:flex;flex-direction:column;gap:24px">
+  <div style="display:flex;flex-direction:column;gap:4px"><div style="font-size:13px;font-weight:700;color:#66645F">03</div><div style="font-size:32px;line-height:40px;font-weight:700">Drag and drop</div></div>
+  <div style="display:flex;gap:32px">
+    <div style="display:flex;flex-direction:column;gap:12px"><div style="font-size:13px;font-weight:700">Dark</div><div style="--bg:#111111;--surface:#191919;--raised:#232323;--line:#2C2C2C;--text:#F2F1EE;--muted:#A3A19C;--accent:#F26B3A;--on-accent:#141414;--overlay:rgba(17,17,17,0.92);--scrim:rgba(0,0,0,0.55);--shadow:0 8px 24px rgba(0,0,0,0.4);--desk:#2A2A2A"><dc-import name="AppWindow" screen="drag" style="width:1280px;height:800px" hint-size="1280px,800px"></dc-import></div></div>
+    <div style="display:flex;flex-direction:column;gap:12px"><div style="font-size:13px;font-weight:700">Light</div><div style="--bg:#FAFAF8;--surface:#F2F1EE;--raised:#E8E7E3;--line:#E2E1DC;--text:#141414;--muted:#66645F;--accent:#F26B3A;--on-accent:#141414;--overlay:rgba(250,250,248,0.92);--scrim:rgba(20,20,20,0.28);--shadow:0 8px 24px rgba(20,20,20,0.10);--desk:#CFCEC9"><dc-import name="AppWindow" screen="drag" style="width:1280px;height:800px" hint-size="1280px,800px"></dc-import></div></div>
+  </div>
+</section>
+
+<section id="context" style="display:flex;flex-direction:column;gap:24px">
+  <div style="display:flex;flex-direction:column;gap:4px"><div style="font-size:13px;font-weight:700;color:#66645F">04</div><div style="font-size:32px;line-height:40px;font-weight:700">Hover reactions and context menu</div><div style="font-size:15px;color:#66645F">Shown together for review; in use the reaction bar appears on hover and the menu on right-click.</div></div>
+  <div style="display:flex;gap:32px">
+    <div style="display:flex;flex-direction:column;gap:12px"><div style="font-size:13px;font-weight:700">Dark</div><div style="--bg:#111111;--surface:#191919;--raised:#232323;--line:#2C2C2C;--text:#F2F1EE;--muted:#A3A19C;--accent:#F26B3A;--on-accent:#141414;--overlay:rgba(17,17,17,0.92);--scrim:rgba(0,0,0,0.55);--shadow:0 8px 24px rgba(0,0,0,0.4);--desk:#2A2A2A"><dc-import name="AppWindow" screen="context" style="width:1280px;height:800px" hint-size="1280px,800px"></dc-import></div></div>
+    <div style="display:flex;flex-direction:column;gap:12px"><div style="font-size:13px;font-weight:700">Light</div><div style="--bg:#FAFAF8;--surface:#F2F1EE;--raised:#E8E7E3;--line:#E2E1DC;--text:#141414;--muted:#66645F;--accent:#F26B3A;--on-accent:#141414;--overlay:rgba(250,250,248,0.92);--scrim:rgba(20,20,20,0.28);--shadow:0 8px 24px rgba(20,20,20,0.10);--desk:#CFCEC9"><dc-import name="AppWindow" screen="context" style="width:1280px;height:800px" hint-size="1280px,800px"></dc-import></div></div>
+  </div>
+</section>
+
+<section id="info" style="display:flex;flex-direction:column;gap:24px">
+  <div style="display:flex;flex-direction:column;gap:4px"><div style="font-size:13px;font-weight:700;color:#66645F">05</div><div style="font-size:32px;line-height:40px;font-weight:700">Device info panel</div><div style="font-size:15px;color:#66645F">Slides in from the right (200 ms ease-out); the chat narrows to fit.</div></div>
+  <div style="display:flex;gap:32px">
+    <div style="display:flex;flex-direction:column;gap:12px"><div style="font-size:13px;font-weight:700">Dark</div><div style="--bg:#111111;--surface:#191919;--raised:#232323;--line:#2C2C2C;--text:#F2F1EE;--muted:#A3A19C;--accent:#F26B3A;--on-accent:#141414;--overlay:rgba(17,17,17,0.92);--scrim:rgba(0,0,0,0.55);--shadow:0 8px 24px rgba(0,0,0,0.4);--desk:#2A2A2A"><dc-import name="AppWindow" screen="info" style="width:1280px;height:800px" hint-size="1280px,800px"></dc-import></div></div>
+    <div style="display:flex;flex-direction:column;gap:12px"><div style="font-size:13px;font-weight:700">Light</div><div style="--bg:#FAFAF8;--surface:#F2F1EE;--raised:#E8E7E3;--line:#E2E1DC;--text:#141414;--muted:#66645F;--accent:#F26B3A;--on-accent:#141414;--overlay:rgba(250,250,248,0.92);--scrim:rgba(20,20,20,0.28);--shadow:0 8px 24px rgba(20,20,20,0.10);--desk:#CFCEC9"><dc-import name="AppWindow" screen="info" style="width:1280px;height:800px" hint-size="1280px,800px"></dc-import></div></div>
+  </div>
+</section>
+
+<section id="add" style="display:flex;flex-direction:column;gap:24px">
+  <div style="display:flex;flex-direction:column;gap:4px"><div style="font-size:13px;font-weight:700;color:#66645F">06</div><div style="font-size:32px;line-height:40px;font-weight:700">Add device</div><div style="font-size:15px;color:#66645F">Opened from + in the sidebar. Type a name and press Connect to run through the states.</div></div>
+  <div style="display:flex;gap:32px">
+    <div style="display:flex;flex-direction:column;gap:12px"><div style="font-size:13px;font-weight:700">Dark</div><div style="--bg:#111111;--surface:#191919;--raised:#232323;--line:#2C2C2C;--text:#F2F1EE;--muted:#A3A19C;--accent:#F26B3A;--on-accent:#141414;--overlay:rgba(17,17,17,0.92);--scrim:rgba(0,0,0,0.55);--shadow:0 8px 24px rgba(0,0,0,0.4);--desk:#2A2A2A"><dc-import name="AppWindow" screen="add" style="width:1280px;height:800px" hint-size="1280px,800px"></dc-import></div></div>
+    <div style="display:flex;flex-direction:column;gap:12px"><div style="font-size:13px;font-weight:700">Light</div><div style="--bg:#FAFAF8;--surface:#F2F1EE;--raised:#E8E7E3;--line:#E2E1DC;--text:#141414;--muted:#66645F;--accent:#F26B3A;--on-accent:#141414;--overlay:rgba(250,250,248,0.92);--scrim:rgba(20,20,20,0.28);--shadow:0 8px 24px rgba(20,20,20,0.10);--desk:#CFCEC9"><dc-import name="AppWindow" screen="add" style="width:1280px;height:800px" hint-size="1280px,800px"></dc-import></div></div>
+  </div>
+  <div style="display:flex;gap:32px">
+    <div style="display:flex;gap:16px;padding:16px;border-radius:16px;--bg:#111111;--surface:#191919;--raised:#232323;--line:#2C2C2C;--text:#F2F1EE;--muted:#A3A19C;--accent:#F26B3A;--on-accent:#141414;--overlay:rgba(17,17,17,0.92);--scrim:rgba(0,0,0,0.55);--shadow:0 8px 24px rgba(0,0,0,0.4);background:#111111">
+      <div style="display:flex;flex-direction:column;gap:8px"><div style="font-size:13px;font-weight:700;color:#A3A19C;padding-left:12px">Searching</div><dc-import name="AppWindow" screen="dialog" dialog-state="searching" style="width:416px;height:400px" hint-size="416px,400px"></dc-import></div>
+      <div style="display:flex;flex-direction:column;gap:8px"><div style="font-size:13px;font-weight:700;color:#A3A19C;padding-left:12px">Found</div><dc-import name="AppWindow" screen="dialog" dialog-state="found" style="width:416px;height:400px" hint-size="416px,400px"></dc-import></div>
+      <div style="display:flex;flex-direction:column;gap:8px"><div style="font-size:13px;font-weight:700;color:#A3A19C;padding-left:12px">Failed</div><dc-import name="AppWindow" screen="dialog" dialog-state="failed" style="width:416px;height:400px" hint-size="416px,400px"></dc-import></div>
+    </div>
+    <div style="display:flex;gap:16px;padding:16px;border-radius:16px;--bg:#FAFAF8;--surface:#F2F1EE;--raised:#E8E7E3;--line:#E2E1DC;--text:#141414;--muted:#66645F;--accent:#F26B3A;--on-accent:#141414;--overlay:rgba(250,250,248,0.92);--scrim:rgba(20,20,20,0.28);--shadow:0 8px 24px rgba(20,20,20,0.10);background:#FAFAF8">
+      <div style="display:flex;flex-direction:column;gap:8px"><div style="font-size:13px;font-weight:700;color:#66645F;padding-left:12px">Searching</div><dc-import name="AppWindow" screen="dialog" dialog-state="searching" style="width:416px;height:400px" hint-size="416px,400px"></dc-import></div>
+      <div style="display:flex;flex-direction:column;gap:8px"><div style="font-size:13px;font-weight:700;color:#66645F;padding-left:12px">Found</div><dc-import name="AppWindow" screen="dialog" dialog-state="found" style="width:416px;height:400px" hint-size="416px,400px"></dc-import></div>
+      <div style="display:flex;flex-direction:column;gap:8px"><div style="font-size:13px;font-weight:700;color:#66645F;padding-left:12px">Failed</div><dc-import name="AppWindow" screen="dialog" dialog-state="failed" style="width:416px;height:400px" hint-size="416px,400px"></dc-import></div>
+    </div>
+  </div>
+</section>
+
+<section id="notify" style="display:flex;flex-direction:column;gap:24px">
+  <div style="display:flex;flex-direction:column;gap:4px"><div style="font-size:13px;font-weight:700;color:#66645F">07</div><div style="font-size:32px;line-height:40px;font-weight:700">Notification and tray menu</div><div style="font-size:15px;color:#66645F">Linux desktop. The real notification is drawn by the shell; this shows content and actions. The tray icon carries the online dot.</div></div>
+  <div style="display:flex;gap:32px">
+    <div style="display:flex;flex-direction:column;gap:12px"><div style="font-size:13px;font-weight:700">Dark</div><div style="--bg:#111111;--surface:#191919;--raised:#232323;--line:#2C2C2C;--text:#F2F1EE;--muted:#A3A19C;--accent:#F26B3A;--on-accent:#141414;--overlay:rgba(17,17,17,0.92);--scrim:rgba(0,0,0,0.55);--shadow:0 8px 24px rgba(0,0,0,0.4);--desk:#2A2A2A"><dc-import name="AppWindow" screen="desktop" style="width:1280px;height:400px" hint-size="1280px,400px"></dc-import></div></div>
+    <div style="display:flex;flex-direction:column;gap:12px"><div style="font-size:13px;font-weight:700">Light</div><div style="--bg:#FAFAF8;--surface:#F2F1EE;--raised:#E8E7E3;--line:#E2E1DC;--text:#141414;--muted:#66645F;--accent:#F26B3A;--on-accent:#141414;--overlay:rgba(250,250,248,0.92);--scrim:rgba(20,20,20,0.28);--shadow:0 8px 24px rgba(20,20,20,0.10);--desk:#CFCEC9"><dc-import name="AppWindow" screen="desktop" style="width:1280px;height:400px" hint-size="1280px,400px"></dc-import></div></div>
+  </div>
+</section>
+
+<section id="empty-devices" style="display:flex;flex-direction:column;gap:24px">
+  <div style="display:flex;flex-direction:column;gap:4px"><div style="font-size:13px;font-weight:700;color:#66645F">08a</div><div style="font-size:32px;line-height:40px;font-weight:700">Empty: no devices yet</div></div>
+  <div style="display:flex;gap:32px">
+    <div style="display:flex;flex-direction:column;gap:12px"><div style="font-size:13px;font-weight:700">Dark</div><div style="--bg:#111111;--surface:#191919;--raised:#232323;--line:#2C2C2C;--text:#F2F1EE;--muted:#A3A19C;--accent:#F26B3A;--on-accent:#141414;--overlay:rgba(17,17,17,0.92);--scrim:rgba(0,0,0,0.55);--shadow:0 8px 24px rgba(0,0,0,0.4);--desk:#2A2A2A"><dc-import name="AppWindow" screen="empty-devices" style="width:1280px;height:800px" hint-size="1280px,800px"></dc-import></div></div>
+    <div style="display:flex;flex-direction:column;gap:12px"><div style="font-size:13px;font-weight:700">Light</div><div style="--bg:#FAFAF8;--surface:#F2F1EE;--raised:#E8E7E3;--line:#E2E1DC;--text:#141414;--muted:#66645F;--accent:#F26B3A;--on-accent:#141414;--overlay:rgba(250,250,248,0.92);--scrim:rgba(20,20,20,0.28);--shadow:0 8px 24px rgba(20,20,20,0.10);--desk:#CFCEC9"><dc-import name="AppWindow" screen="empty-devices" style="width:1280px;height:800px" hint-size="1280px,800px"></dc-import></div></div>
+  </div>
+</section>
+
+<section id="empty-chat" style="display:flex;flex-direction:column;gap:24px">
+  <div style="display:flex;flex-direction:column;gap:4px"><div style="font-size:13px;font-weight:700;color:#66645F">08b</div><div style="font-size:32px;line-height:40px;font-weight:700">Empty: no chat selected</div></div>
+  <div style="display:flex;gap:32px">
+    <div style="display:flex;flex-direction:column;gap:12px"><div style="font-size:13px;font-weight:700">Dark</div><div style="--bg:#111111;--surface:#191919;--raised:#232323;--line:#2C2C2C;--text:#F2F1EE;--muted:#A3A19C;--accent:#F26B3A;--on-accent:#141414;--overlay:rgba(17,17,17,0.92);--scrim:rgba(0,0,0,0.55);--shadow:0 8px 24px rgba(0,0,0,0.4);--desk:#2A2A2A"><dc-import name="AppWindow" screen="empty-chat" style="width:1280px;height:800px" hint-size="1280px,800px"></dc-import></div></div>
+    <div style="display:flex;flex-direction:column;gap:12px"><div style="font-size:13px;font-weight:700">Light</div><div style="--bg:#FAFAF8;--surface:#F2F1EE;--raised:#E8E7E3;--line:#E2E1DC;--text:#141414;--muted:#66645F;--accent:#F26B3A;--on-accent:#141414;--overlay:rgba(250,250,248,0.92);--scrim:rgba(20,20,20,0.28);--shadow:0 8px 24px rgba(20,20,20,0.10);--desk:#CFCEC9"><dc-import name="AppWindow" screen="empty-chat" style="width:1280px;height:800px" hint-size="1280px,800px"></dc-import></div></div>
+  </div>
+</section>
+
+<section id="min" style="display:flex;flex-direction:column;gap:24px">
+  <div style="display:flex;flex-direction:column;gap:4px"><div style="font-size:13px;font-weight:700;color:#66645F">09</div><div style="font-size:32px;line-height:40px;font-weight:700">Minimum window, 800 × 560</div><div style="font-size:15px;color:#66645F">Sidebar stays 280; the chat keeps the newest messages pinned to the bottom.</div></div>
+  <div style="display:flex;gap:32px">
+    <div style="display:flex;flex-direction:column;gap:12px"><div style="font-size:13px;font-weight:700">Dark</div><div style="--bg:#111111;--surface:#191919;--raised:#232323;--line:#2C2C2C;--text:#F2F1EE;--muted:#A3A19C;--accent:#F26B3A;--on-accent:#141414;--overlay:rgba(17,17,17,0.92);--scrim:rgba(0,0,0,0.55);--shadow:0 8px 24px rgba(0,0,0,0.4);--desk:#2A2A2A"><dc-import name="AppWindow" screen="main" style="width:800px;height:560px" hint-size="800px,560px"></dc-import></div></div>
+    <div style="display:flex;flex-direction:column;gap:12px"><div style="font-size:13px;font-weight:700">Light</div><div style="--bg:#FAFAF8;--surface:#F2F1EE;--raised:#E8E7E3;--line:#E2E1DC;--text:#141414;--muted:#66645F;--accent:#F26B3A;--on-accent:#141414;--overlay:rgba(250,250,248,0.92);--scrim:rgba(20,20,20,0.28);--shadow:0 8px 24px rgba(20,20,20,0.10);--desk:#CFCEC9"><dc-import name="AppWindow" screen="main" style="width:800px;height:560px" hint-size="800px,560px"></dc-import></div></div>
+  </div>
+</section>
+
+</div>
+</x-dc>
+</body>
+</html>

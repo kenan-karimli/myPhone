@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700&amp;display=swap" rel="stylesheet"><style>@keyframes mp-spin{to{transform:rotate(360deg)}} input::placeholder{color:inherit;opacity:.55} ::-webkit-scrollbar{display:none}</style></helmet>
+<div ref="{{ rootRef }}" data-screen-label="{{ screenLabel }}" style="width:412px;height:915px;position:relative;overflow:hidden;background:var(--bg);color:var(--text);font-family:'M PLUS Rounded 1c',system-ui,sans-serif;font-size:15px;line-height:1.45;display:flex;flex-direction:column;-webkit-user-select:none;user-select:none">
+
+<div style="height:36px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:0 24px;font-size:13px;font-weight:500">
+<span>9:41</span>
+<div style="display:flex;gap:6px;align-items:center">
+<svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M2 11h2v3H2zM6 8h2v6H6zM10 5h2v9h-2z"></path></svg>
+<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M2 6.5a9 9 0 0 1 12 0M4.5 9a5.5 5.5 0 0 1 7 0M8 12.5h.01"></path></svg>
+<svg width="22" height="16" viewBox="0 0 22 16" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="1" y="3.5" width="17" height="9" rx="2.5"></rect><rect x="3" y="5.5" width="11" height="5" rx="1" fill="currentColor" stroke="none"></rect><path d="M20 7v2" stroke-linecap="round"></path></svg>
+</div>
+</div>
+
+<div style="flex:1;min-height:0;display:flex;flex-direction:column;position:relative">
+
+<sc-if value="{{ isDevices }}" hint-placeholder-val="{{ false }}">
+<div style="flex:1;min-height:0;display:flex;flex-direction:column">
+<div style="display:flex;align-items:center;justify-content:space-between;padding:16px 24px 24px">
+<div style="font-size:20px;font-weight:700">myPhone</div>
+<button onClick="{{ goAdd }}" aria-label="Add device" style="width:44px;height:44px;border-radius:999px;border:none;background:var(--text);color:var(--bg);display:grid;place-items:center;cursor:pointer;padding:0"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg></button>
+</div>
+<sc-if value="{{ hasDevices }}" hint-placeholder-val="{{ true }}">
+<div style="flex:1;overflow-y:auto;overflow-x:hidden;scrollbar-width:none;display:flex;flex-direction:column;gap:4px;padding:0 12px">
+<sc-for list="{{ deviceRows }}" as="d" hint-placeholder-count="4">
+<div onClick="{{ d.open }}" style="display:flex;gap:16px;align-items:center;padding:12px;border-radius:20px;cursor:pointer" style-hover="background:var(--surface)">
+<div style="width:48px;height:48px;flex:none;border-radius:999px;background:var(--surface2);display:grid;place-items:center"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="{{ d.iconD }}"></path></svg></div>
+<div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px">
+<div style="display:flex;align-items:center;gap:8px;min-width:0">
+<span style="font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ d.name }}</span>
+<sc-if value="{{ d.online }}"><span style="width:8px;height:8px;border-radius:999px;background:var(--dot);flex:none"></span></sc-if>
+<sc-if value="{{ d.offline }}"><span style="font-size:13px;color:var(--text2);white-space:nowrap">{{ d.seen }}</span></sc-if>
+<span style="margin-left:auto;font-size:13px;color:var(--text2);flex:none">{{ d.time }}</span>
+</div>
+<div style="color:var(--text2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ d.preview }}</div>
+</div>
+</div>
+</sc-for>
+</div>
+</sc-if>
+<sc-if value="{{ noDevices }}" hint-placeholder-val="{{ false }}">
+<div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:0 48px 96px;text-align:center">
+<div style="display:flex;gap:16px;color:var(--text3);margin-bottom:8px">
+<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 2.5h5a2.5 2.5 0 0 1 2.5 2.5v14a2.5 2.5 0 0 1-2.5 2.5h-5A2.5 2.5 0 0 1 7 19V5a2.5 2.5 0 0 1 2.5-2.5zM11 18.5h2"></path></svg>
+<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 5h12a1.5 1.5 0 0 1 1.5 1.5V15h-15V6.5A1.5 1.5 0 0 1 6 5zM2.5 18.5h19"></path></svg>
+<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 4h15A1.5 1.5 0 0 1 21 5.5v9a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 14.5v-9A1.5 1.5 0 0 1 4.5 4zM9 20h6M12 16v4"></path></svg>
+</div>
+<div style="font-size:20px;font-weight:700">No devices yet</div>
+<div style="color:var(--text2);text-wrap:pretty">Add a laptop, desktop or tablet by its Tailscale name. Each one shows up here as its own conversation.</div>
+<button onClick="{{ goAdd }}" style="margin-top:8px;height:48px;padding:0 24px;border-radius:999px;border:none;background:var(--text);color:var(--bg);font:inherit;font-weight:700;cursor:pointer">Add a device</button>
+</div>
+</sc-if>
+</div>
+</sc-if>
+
+<sc-if value="{{ isChat }}" hint-placeholder-val="{{ false }}">
+<div style="flex:1;min-height:0;display:flex;flex-direction:column">
+<div style="display:flex;align-items:center;gap:4px;padding:8px 8px 8px 4px">
+<button onClick="{{ goDevices }}" aria-label="Back" style="width:44px;height:44px;border:none;background:none;color:var(--text);display:grid;place-items:center;cursor:pointer;padding:0;border-radius:999px"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"></path></svg></button>
+<div onClick="{{ openSheet }}" style="flex:1;min-width:0;display:flex;align-items:center;gap:12px;cursor:pointer;padding:4px 8px 4px 0;border-radius:16px">
+<div style="width:40px;height:40px;flex:none;border-radius:999px;background:var(--surface2);display:grid;place-items:center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="{{ dev.iconD }}"></path></svg></div>
+<div style="display:flex;flex-direction:column;min-width:0">
+<span style="font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ dev.name }}</span>
+<div style="display:flex;align-items:center;gap:6px;font-size:13px;color:var(--text2)">
+<sc-if value="{{ dev.online }}"><span style="width:8px;height:8px;border-radius:999px;background:var(--dot)"></span></sc-if>
+<span>{{ dev.status }}</span>
+</div>
+</div>
+</div>
+<button onClick="{{ openSheet }}" aria-label="Device info" style="width:44px;height:44px;border:none;background:none;color:var(--text2);display:grid;place-items:center;cursor:pointer;padding:0;border-radius:999px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5a8.5 8.5 0 1 0 0 17 8.5 8.5 0 0 0 0-17zM12 11v5M12 8h.01"></path></svg></button>
+</div>
+
+<sc-if value="{{ hasMsgs }}" hint-placeholder-val="{{ true }}">
+<div ref="{{ scrollRef }}" style="flex:1;min-height:0;overflow-y:auto;overflow-x:hidden;scrollbar-width:none;padding:8px 16px 16px;display:flex;flex-direction:column;gap:12px">
+<div style="align-self:center;font-size:13px;color:var(--text2);padding:4px 0 8px">Today</div>
+<sc-for list="{{ msgs }}" as="m" hint-placeholder-count="5">
+<div style="display:flex;flex-direction:column;align-items:{{ m.align }};gap:4px">
+<div onPointerDown="{{ m.onDown }}" onPointerUp="{{ m.onUp }}" onPointerLeave="{{ m.onUp }}" onContextMenu="{{ m.onContext }}" onClick="{{ m.onTap }}" style="max-width:80%;background:{{ m.bg }};color:{{ m.fg }};border-radius:{{ m.radius }};padding:{{ m.pad }};display:flex;flex-direction:column;gap:8px;cursor:pointer">
+<sc-if value="{{ m.hasReply }}">
+<div style="display:flex;flex-direction:column;padding:6px 12px;border-radius:14px;background:{{ m.quoteBg }};min-width:0">
+<div style="display:flex;align-items:center;gap:4px;font-size:13px;font-weight:700"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 8l-5 4 5 4M5 12h9a5 5 0 0 1 5 5v1"></path></svg>{{ m.replyTo.who }}</div>
+<span style="font-size:13px;color:{{ m.sub }};white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ m.replyTo.text }}</span>
+</div>
+</sc-if>
+<sc-if value="{{ m.isText }}"><span style="text-wrap:pretty;overflow-wrap:anywhere">{{ m.text }}</span></sc-if>
+<sc-if value="{{ m.isFile }}">
+<div style="display:flex;gap:12px;align-items:center;width:224px">
+<div style="width:44px;height:44px;flex:none;border-radius:12px;background:{{ m.tileBg }};display:grid;place-items:center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8zM14 3v5h5"></path></svg></div>
+<div style="flex:1;min-width:0;display:flex;flex-direction:column">
+<span style="font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ m.file.name }}</span>
+<span style="font-size:13px;color:{{ m.sub }}">{{ m.sizeLabel }}</span>
+</div>
+</div>
+<sc-if value="{{ m.sending }}">
+<div style="height:4px;border-radius:999px;background:{{ m.tileBg }};overflow:hidden;margin-bottom:2px"><div style="height:100%;width:{{ m.pct }};background:{{ m.fg }};border-radius:999px;transition:width .12s linear"></div></div>
+</sc-if>
+</sc-if>
+<sc-if value="{{ m.isImage }}">
+<div style="width:232px;height:168px;border-radius:16px;background:var(--imgPh);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;color:var(--text2)">
+<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5.5 4.5h13a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2h-13a2 2 0 0 1-2-2v-11a2 2 0 0 1 2-2zM20.5 15.5l-5-5-9 9M9 8.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3z"></path></svg>
+<span style="font-size:13px">{{ m.image.name }}</span>
+</div>
+</sc-if>
+</div>
+<div style="display:flex;align-items:center;gap:6px;padding:0 4px">
+<sc-for list="{{ m.reacts }}" as="r">
+<button onClick="{{ r.toggle }}" style="height:26px;padding:0 8px;border-radius:999px;border:1px solid {{ r.border }};background:var(--surface);color:var(--text);font:inherit;font-size:13px;display:flex;align-items:center;gap:4px;cursor:pointer">{{ r.label }}</button>
+</sc-for>
+<span style="font-size:13px;color:var(--text2)">{{ m.meta }}</span>
+</div>
+</div>
+</sc-for>
+</div>
+</sc-if>
+
+<sc-if value="{{ noMsgs }}" hint-placeholder-val="{{ false }}">
+<div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:0 48px 48px;text-align:center">
+<div style="width:72px;height:72px;border-radius:999px;background:var(--surface2);display:grid;place-items:center;margin-bottom:8px"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="{{ dev.iconD }}"></path></svg></div>
+<div style="font-size:20px;font-weight:700">Nothing here yet</div>
+<div style="color:var(--text2);text-wrap:pretty">{{ emptyChatBody }}</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ hasReplyDraft }}">
+<div style="margin:0 12px 4px;padding:8px 8px 8px 16px;border-radius:16px;background:var(--surface);border:1px solid var(--line);display:flex;align-items:center;gap:12px">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="color:var(--text2);flex:none"><path d="M10 8l-5 4 5 4M5 12h9a5 5 0 0 1 5 5v1"></path></svg>
+<div style="flex:1;min-width:0;display:flex;flex-direction:column">
+<span style="font-size:13px;font-weight:700">Replying to {{ reply.who }}</span>
+<span style="font-size:13px;color:var(--text2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ reply.text }}</span>
+</div>
+<button onClick="{{ clearReply }}" aria-label="Cancel reply" style="width:44px;height:44px;border:none;background:none;color:var(--text2);display:grid;place-items:center;cursor:pointer;padding:0"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
+</div>
+</sc-if>
+
+<div style="display:flex;align-items:center;gap:8px;padding:8px 12px 12px">
+<div style="flex:1;min-width:0;height:48px;border-radius:999px;background:var(--surface);border:1px solid var(--line);display:flex;align-items:center;padding:0 4px">
+<button onClick="{{ attach }}" aria-label="Attach file" style="width:40px;height:40px;flex:none;border:none;background:none;color:var(--text2);display:grid;place-items:center;cursor:pointer;padding:0;border-radius:999px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11.5l-8.2 8.2a5 5 0 0 1-7.1-7.1l8.5-8.5a3.3 3.3 0 0 1 4.7 4.7l-8.5 8.5a1.7 1.7 0 0 1-2.4-2.4l7.8-7.8"></path></svg></button>
+<input value="{{ draft }}" onChange="{{ onDraft }}" onKeyDown="{{ onKey }}" placeholder="{{ inputPh }}" style="flex:1;min-width:0;height:100%;border:none;outline:none;background:none;color:var(--text);font:inherit;padding:0 8px"></input>
+</div>
+<button onClick="{{ send }}" aria-label="Send" style="width:48px;height:48px;flex:none;border-radius:999px;border:none;background:var(--accent);color:var(--onAccent);display:grid;place-items:center;cursor:pointer;padding:0"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></button>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ isAdd }}" hint-placeholder-val="{{ false }}">
+<div style="flex:1;min-height:0;display:flex;flex-direction:column">
+<div style="display:flex;align-items:center;gap:8px;padding:8px 8px 8px 4px">
+<button onClick="{{ goDevices }}" aria-label="Back" style="width:44px;height:44px;border:none;background:none;color:var(--text);display:grid;place-items:center;cursor:pointer;padding:0;border-radius:999px"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"></path></svg></button>
+<span style="font-size:20px;font-weight:700">Add device</span>
+</div>
+<div style="display:flex;flex-direction:column;gap:8px;padding:24px 24px 0">
+<label style="font-size:13px;font-weight:500;color:var(--text2)">Device name (Tailscale name)</label>
+<input value="{{ addName }}" onChange="{{ onAddName }}" onKeyDown="{{ onAddKey }}" placeholder="e.g. media-server" spellcheck="false" style="height:52px;border-radius:16px;background:var(--surface);border:1px solid {{ fieldBorder }};padding:0 16px;color:var(--text);font:inherit;outline:none"></input>
+<span style="font-size:13px;color:var(--text2)">Both devices need to be on the same tailnet.</span>
+</div>
+<div style="padding:24px">
+<button onClick="{{ connect }}" style="width:100%;height:52px;border-radius:999px;border:none;background:var(--text);color:var(--bg);font:inherit;font-weight:700;cursor:pointer;opacity:{{ connectOpacity }}">Connect</button>
+</div>
+<sc-if value="{{ isSearching }}">
+<div style="margin:0 24px;padding:16px;border-radius:20px;background:var(--surface);display:flex;align-items:center;gap:16px">
+{{ spinner }}
+<div style="display:flex;flex-direction:column;min-width:0">
+<span style="font-weight:700">Searching…</span>
+<span style="font-size:13px;color:var(--text2)">Looking for {{ addName }} on your tailnet</span>
+</div>
+</div>
+</sc-if>
+<sc-if value="{{ isFound }}">
+<div style="margin:0 24px;padding:16px;border-radius:20px;background:var(--surface);display:flex;flex-direction:column;gap:16px">
+<div style="display:flex;align-items:center;gap:16px">
+<div style="width:48px;height:48px;flex:none;border-radius:999px;background:var(--surface2);display:grid;place-items:center"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="{{ found.iconD }}"></path></svg></div>
+<div style="flex:1;min-width:0;display:flex;flex-direction:column">
+<div style="display:flex;align-items:center;gap:8px"><span style="font-weight:700">{{ found.name }}</span><span style="width:8px;height:8px;border-radius:999px;background:var(--dot)"></span></div>
+<span style="font-size:13px;color:var(--text2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ found.addr }} · {{ found.host }}</span>
+</div>
+</div>
+<button onClick="{{ addFound }}" style="height:48px;border-radius:999px;border:1px solid var(--line);background:none;color:var(--text);font:inherit;font-weight:700;cursor:pointer">Add to myPhone</button>
+</div>
+</sc-if>
+<sc-if value="{{ isFailed }}">
+<div style="margin:0 24px;padding:16px;border-radius:20px;background:var(--surface);display:flex;gap:16px;align-items:flex-start">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="flex:none;color:var(--text2);margin-top:1px"><path d="M12 3.5a8.5 8.5 0 1 0 0 17 8.5 8.5 0 0 0 0-17zM12 7.5v5.5M12 16h.01"></path></svg>
+<div style="display:flex;flex-direction:column;gap:2px;min-width:0">
+<span style="font-weight:700">Couldn’t find “{{ addName }}”</span>
+<span style="font-size:13px;color:var(--text2);text-wrap:pretty">Check the spelling, and that Tailscale is running on both devices.</span>
+</div>
+</div>
+</sc-if>
+</div>
+</sc-if>
+
+<sc-if value="{{ isNotif }}" hint-placeholder-val="{{ false }}">
+<div style="flex:1;min-height:0;background:var(--shade);display:flex;flex-direction:column;gap:8px;padding:0 12px">
+<div style="display:flex;flex-direction:column;padding:16px 12px 16px">
+<span style="font-size:20px;font-weight:700">9:41</span>
+<span style="font-size:13px;color:var(--text2)">Saturday, 31 October</span>
+</div>
+
+<div style="background:var(--surface);border-radius:24px;padding:16px;display:flex;flex-direction:column;gap:12px">
+<div style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--text2)">
+<span style="width:20px;height:20px;border-radius:999px;background:var(--text);color:var(--bg);display:grid;place-items:center"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 2.5h5a2.5 2.5 0 0 1 2.5 2.5v14a2.5 2.5 0 0 1-2.5 2.5h-5A2.5 2.5 0 0 1 7 19V5a2.5 2.5 0 0 1 2.5-2.5z"></path></svg></span>
+<span>myPhone · now</span>
+</div>
+<div style="display:flex;gap:12px;align-items:flex-start">
+<div style="flex:1;min-width:0;display:flex;flex-direction:column">
+<span style="font-weight:700">thinkpad</span>
+<span style="color:var(--text2);text-wrap:pretty">Leaving the office now. The build is on the shared drive.</span>
+</div>
+<div style="width:40px;height:40px;flex:none;border-radius:999px;background:var(--surface2);display:grid;place-items:center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 5h12a1.5 1.5 0 0 1 1.5 1.5V15h-15V6.5A1.5 1.5 0 0 1 6 5zM2.5 18.5h19"></path></svg></div>
+</div>
+<sc-if value="{{ n1.actions }}">
+<div style="display:flex;gap:8px">
+<button onClick="{{ n1.openReply }}" style="height:36px;padding:0 16px;border-radius:999px;border:none;background:var(--surface2);color:var(--text);font:inherit;font-size:13px;font-weight:700;cursor:pointer">Reply</button>
+<button onClick="{{ n1.markRead }}" style="height:36px;padding:0 16px;border-radius:999px;border:none;background:none;color:var(--text);font:inherit;font-size:13px;font-weight:700;cursor:pointer">Mark as read</button>
+</div>
+</sc-if>
+<sc-if value="{{ n1.replying }}">
+<div style="display:flex;gap:8px;align-items:center">
+<input value="{{ nDraft }}" onChange="{{ onNDraft }}" onKeyDown="{{ n1.onKey }}" placeholder="Reply to thinkpad" style="flex:1;min-width:0;height:44px;border-radius:999px;border:1px solid var(--line);background:var(--bg);padding:0 16px;color:var(--text);font:inherit;outline:none"></input>
+<button onClick="{{ n1.send }}" aria-label="Send" style="width:44px;height:44px;flex:none;border-radius:999px;border:none;background:var(--accent);color:var(--onAccent);display:grid;place-items:center;cursor:pointer;padding:0"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></button>
+</div>
+</sc-if>
+<sc-if value="{{ n1.sent }}">
+<div style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--text2)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg><span>{{ n1.sentText }}</span></div>
+</sc-if>
+</div>
+
+<div style="background:var(--surface);border-radius:24px;padding:16px;display:flex;flex-direction:column;gap:12px">
+<div style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--text2)">
+<span style="width:20px;height:20px;border-radius:999px;background:var(--text);color:var(--bg);display:grid;place-items:center"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 2.5h5a2.5 2.5 0 0 1 2.5 2.5v14a2.5 2.5 0 0 1-2.5 2.5h-5A2.5 2.5 0 0 1 7 19V5a2.5 2.5 0 0 1 2.5-2.5z"></path></svg></span>
+<span>myPhone · 2 min</span>
+</div>
+<div style="display:flex;flex-direction:column">
+<span style="font-weight:700">thinkpad sent a file</span>
+</div>
+<div style="display:flex;align-items:center;gap:12px;padding:12px;border-radius:16px;background:var(--surface2)">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="flex:none"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8zM14 3v5h5"></path></svg>
+<div style="flex:1;min-width:0;display:flex;flex-direction:column"><span style="font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">talk-final.pdf</span><span style="font-size:13px;color:var(--text2)">PDF · 4.2 MB</span></div>
+</div>
+<sc-if value="{{ n2.actions }}">
+<div style="display:flex;gap:8px">
+<button onClick="{{ n2.openReply }}" style="height:36px;padding:0 16px;border-radius:999px;border:none;background:var(--surface2);color:var(--text);font:inherit;font-size:13px;font-weight:700;cursor:pointer">Reply</button>
+<button onClick="{{ n2.openFile }}" style="height:36px;padding:0 16px;border-radius:999px;border:none;background:none;color:var(--text);font:inherit;font-size:13px;font-weight:700;cursor:pointer">Open</button>
+</div>
+</sc-if>
+<sc-if value="{{ n2.replying }}">
+<div style="display:flex;gap:8px;align-items:center">
+<input value="{{ nDraft }}" onChange="{{ onNDraft }}" onKeyDown="{{ n2.onKey }}" placeholder="Reply to thinkpad" style="flex:1;min-width:0;height:44px;border-radius:999px;border:1px solid var(--line);background:var(--bg);padding:0 16px;color:var(--text);font:inherit;outline:none"></input>
+<button onClick="{{ n2.send }}" aria-label="Send" style="width:44px;height:44px;flex:none;border-radius:999px;border:none;background:var(--accent);color:var(--onAccent);display:grid;place-items:center;cursor:pointer;padding:0"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></button>
+</div>
+</sc-if>
+<sc-if value="{{ n2.sent }}">
+<div style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--text2)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg><span>{{ n2.sentText }}</span></div>
+</sc-if>
+</div>
+</div>
+</sc-if>
+
+</div>
+
+<div style="height:24px;flex:none;display:grid;place-items:center;background:{{ navBg }}"><div style="width:108px;height:4px;border-radius:999px;background:var(--text3)"></div></div>
+
+<sc-if value="{{ menuOpen }}">
+<div onClick="{{ closeMenu }}" style="position:absolute;inset:0;z-index:20;background:var(--scrim);display:flex;flex-direction:column;justify-content:center;align-items:{{ menu.align }};gap:12px;padding:24px 16px">
+<div onClick="{{ stop }}" style="display:flex;gap:2px;padding:4px;background:var(--surface);border-radius:999px;border:1px solid var(--line)">
+<sc-for list="{{ emojis }}" as="e">
+<button onClick="{{ e.pick }}" style="width:44px;height:44px;border-radius:999px;border:none;background:{{ e.bg }};font-size:20px;line-height:1;cursor:pointer;padding:0;display:grid;place-items:center">{{ e.e }}</button>
+</sc-for>
+<button onClick="{{ toggleMore }}" aria-label="More reactions" style="width:44px;height:44px;border-radius:999px;border:none;background:var(--surface2);color:var(--text);cursor:pointer;padding:0;display:grid;place-items:center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg></button>
+</div>
+<sc-if value="{{ moreEmoji }}">
+<div onClick="{{ stop }}" style="display:grid;grid-template-columns:repeat(6,44px);gap:2px;padding:4px;background:var(--surface);border-radius:24px;border:1px solid var(--line)">
+<sc-for list="{{ moreEmojis }}" as="e">
+<button onClick="{{ e.pick }}" style="width:44px;height:44px;border-radius:999px;border:none;background:none;font-size:20px;line-height:1;cursor:pointer;padding:0">{{ e.e }}</button>
+</sc-for>
+</div>
+</sc-if>
+<div style="max-width:80%;background:{{ menu.bg }};color:{{ menu.fg }};border-radius:{{ menu.radius }};padding:10px 16px;overflow-wrap:anywhere">{{ menu.preview }}</div>
+<div onClick="{{ stop }}" style="width:224px;background:var(--surface);border-radius:20px;padding:6px;display:flex;flex-direction:column">
+<button onClick="{{ doReply }}" style="height:48px;border:none;background:none;color:var(--text);font:inherit;display:flex;align-items:center;gap:16px;padding:0 12px;border-radius:14px;cursor:pointer" style-hover="background:var(--surface2)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M10 8l-5 4 5 4M5 12h9a5 5 0 0 1 5 5v1"></path></svg>Reply</button>
+<button onClick="{{ doCopy }}" style="height:48px;border:none;background:none;color:var(--text);font:inherit;display:flex;align-items:center;gap:16px;padding:0 12px;border-radius:14px;cursor:pointer" style-hover="background:var(--surface2)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M10.5 8.5h7a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2h-7a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2zM15.5 8.5v-2a2 2 0 0 0-2-2h-7a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h2"></path></svg>Copy</button>
+<button onClick="{{ doDelete }}" style="height:48px;border:none;background:none;color:var(--text);font:inherit;display:flex;align-items:center;gap:16px;padding:0 12px;border-radius:14px;cursor:pointer" style-hover="background:var(--surface2)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 7h15M10 4h4M6.5 7l.8 11.5A2 2 0 0 0 9.3 20h5.4a2 2 0 0 0 2-1.5L17.5 7"></path></svg>Delete</button>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ sheetOpen }}">
+<div onClick="{{ closeSheet }}" style="position:absolute;inset:0;z-index:20;background:var(--scrim);display:flex;flex-direction:column;justify-content:flex-end">
+<div onClick="{{ stop }}" style="background:var(--surface);border-radius:28px 28px 0 0;padding:12px 24px 48px;display:flex;flex-direction:column;gap:24px">
+<div style="width:36px;height:4px;border-radius:999px;background:var(--line);align-self:center"></div>
+<div style="display:flex;align-items:center;gap:16px">
+<div style="width:56px;height:56px;flex:none;border-radius:999px;background:var(--surface2);display:grid;place-items:center"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="{{ dev.iconD }}"></path></svg></div>
+<div style="display:flex;flex-direction:column;min-width:0">
+<span style="font-size:20px;font-weight:700">{{ dev.name }}</span>
+<div style="display:flex;align-items:center;gap:6px;font-size:13px;color:var(--text2)"><sc-if value="{{ dev.online }}"><span style="width:8px;height:8px;border-radius:999px;background:var(--dot)"></span></sc-if><span>{{ dev.status }}</span></div>
+</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:16px">
+<div style="display:flex;justify-content:space-between;gap:16px"><span style="color:var(--text2)">Address</span><span style="text-align:right;overflow-wrap:anywhere">{{ dev.host }}</span></div>
+<div style="display:flex;justify-content:space-between;gap:16px"><span style="color:var(--text2)">Tailscale IP</span><span>{{ dev.addr }}</span></div>
+<div style="display:flex;justify-content:space-between;gap:16px"><span style="color:var(--text2)">Status</span><span>{{ dev.status }}</span></div>
+</div>
+<div style="height:1px;background:var(--line)"></div>
+<div style="display:flex;flex-direction:column;gap:4px">
+<span style="font-size:13px;font-weight:500;color:var(--text2);padding-bottom:8px">Coming soon</span>
+<div style="display:flex;align-items:center;gap:16px;height:48px;opacity:.45"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 7.5h12a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2zM21.5 10.5v3"></path></svg><span style="flex:1">Battery</span><span style="color:var(--text2)">— %</span></div>
+<div style="display:flex;align-items:center;gap:16px;height:48px;opacity:.45"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 12S6 6 12 6s9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6zM12 9.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5z"></path></svg><span style="flex:1">Screen view</span><span style="font-size:13px;color:var(--text2)">Soon</span></div>
+<div style="display:flex;align-items:center;gap:16px;height:48px;opacity:.45"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5.5 4.5l13 5.2-5.6 1.9-1.9 5.6z"></path></svg><span style="flex:1">Remote control</span><span style="font-size:13px;color:var(--text2)">Soon</span></div>
+</div>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ hasToast }}">
+<div style="position:absolute;left:50%;bottom:96px;transform:translateX(-50%);z-index:30;background:var(--text);color:var(--bg);padding:10px 20px;border-radius:999px;font-size:13px;font-weight:500;white-space:nowrap">{{ toast }}</div>
+</sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:412,&quot;height&quot;:915},&quot;theme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;dark&quot;,&quot;light&quot;],&quot;default&quot;:&quot;dark&quot;,&quot;tsType&quot;:&quot;'dark'|'light'&quot;},&quot;screen&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;devices&quot;,&quot;chat&quot;,&quot;menu&quot;,&quot;add&quot;,&quot;info&quot;,&quot;notif&quot;,&quot;empty-devices&quot;,&quot;empty-chat&quot;],&quot;default&quot;:&quot;devices&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;addState&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;idle&quot;,&quot;searching&quot;,&quot;found&quot;,&quot;failed&quot;],&quot;default&quot;:&quot;idle&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+const THEMES = {
+  dark: { bg:'#0F1011', surface:'#181A1B', surface2:'#232627', line:'#2C3031', text:'#EDEEEA', text2:'#9A9F9C', text3:'#5A5F5C', accent:'#7ADBA9', onAccent:'#0C1F15', onAccentSub:'#2A5A41', dot:'#7ADBA9', scrim:'rgba(0,0,0,0.62)', quoteMine:'rgba(12,31,21,0.10)', quoteTheirs:'#181A1B', imgPh:'#2C3031', shade:'#0B0C0D' },
+  light: { bg:'#F7F6F2', surface:'#FFFFFF', surface2:'#EAE8E2', line:'#E0DED7', text:'#151716', text2:'#5F6562', text3:'#B4B7B4', accent:'#6CD3A0', onAccent:'#0C1F15', onAccentSub:'#2A5A41', dot:'#2FA56E', scrim:'rgba(21,23,22,0.32)', quoteMine:'rgba(12,31,21,0.08)', quoteTheirs:'#FFFFFF', imgPh:'#D9D7D0', shade:'#EFEEE9' }
+};
+const ICON = {
+  phone:'M9.5 2.5h5a2.5 2.5 0 0 1 2.5 2.5v14a2.5 2.5 0 0 1-2.5 2.5h-5A2.5 2.5 0 0 1 7 19V5a2.5 2.5 0 0 1 2.5-2.5zM11 18.5h2',
+  laptop:'M6 5h12a1.5 1.5 0 0 1 1.5 1.5V15h-15V6.5A1.5 1.5 0 0 1 6 5zM2.5 18.5h19',
+  desktop:'M4.5 4h15A1.5 1.5 0 0 1 21 5.5v9a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 14.5v-9A1.5 1.5 0 0 1 4.5 4zM9 20h6M12 16v4',
+  tablet:'M7 3h10a2.5 2.5 0 0 1 2.5 2.5v13A2.5 2.5 0 0 1 17 21H7a2.5 2.5 0 0 1-2.5-2.5v-13A2.5 2.5 0 0 1 7 3zM11 18h2'
+};
+const TAIL = 'tail3f2c.ts.net';
+const DEVICES = [
+  { id:'thinkpad', name:'thinkpad', kind:'laptop', online:true, seen:'', addr:'100.84.12.7', listTime:'10:14' },
+  { id:'desk-pc', name:'desk-pc', kind:'desktop', online:false, seen:'last seen 2h ago', addr:'100.71.40.2', listTime:'08:14' },
+  { id:'old-pixel', name:'old-pixel', kind:'phone', online:true, seen:'', addr:'100.66.3.19', listTime:'Yesterday' },
+  { id:'ipad', name:'ipad', kind:'tablet', online:false, seen:'last seen yesterday', addr:'100.90.7.51', listTime:'' }
+];
+const MSGS = {
+  thinkpad: [
+    { id:'m1', from:'dev', type:'text', text:'Build finished. Logs attached.', time:'10:02' },
+    { id:'m2', from:'dev', type:'file', file:{ name:'build-log.txt', ext:'txt', size:0.018 }, progress:100, time:'10:02' },
+    { id:'m3', from:'me', type:'text', text:'Thanks. Can you send the slides from Desktop/talk?', time:'10:05' },
+    { id:'m4', from:'dev', type:'file', file:{ name:'talk-final.pdf', ext:'pdf', size:4.2 }, progress:100, time:'10:06', reactions:[{ e:'👍', n:1, mine:true }] },
+    { id:'m5', from:'me', type:'image', image:{ name:'IMG_2041.jpg' }, time:'10:11' },
+    { id:'m6', from:'dev', type:'text', text:'Saved to ~/Pictures/phone.', time:'10:12', replyTo:{ who:'You', text:'Photo · IMG_2041.jpg' }, reactions:[{ e:'❤️', n:1, mine:true }] },
+    { id:'m7', from:'me', type:'file', file:{ name:'notes.zip', ext:'zip', size:12.8 }, progress:62, time:'10:14' }
+  ],
+  'desk-pc': [ { id:'d1', from:'dev', type:'text', text:'Nightly backup complete. 3.1 GB copied to /mnt/backup.', time:'08:14' } ],
+  'old-pixel': [ { id:'p1', from:'me', type:'file', file:{ name:'boarding-pass.pdf', ext:'pdf', size:0.3 }, progress:100, time:'18:40' } ],
+  ipad: []
+};
+const KNOWN = ['media-server', 'studio-mac', 'nas', 'raspberrypi', 'work-laptop', 'galaxy-tab'];
+const QUICK = ['👍', '❤️', '😂', '😮', '😢', '🙏'];
+const MORE = ['🔥', '🎉', '👀', '✅', '💯', '🤔', '👏', '😅', '🙌', '💡', '📌', '🚀'];
+const ATTACH = [
+  { name:'screenshot-1031.png', ext:'png', size:2.4 },
+  { name:'invoice-oct.pdf', ext:'pdf', size:0.9 },
+  { name:'recording.m4a', ext:'m4a', size:6.1 }
+];
+const kindFor = n => /mac|laptop|book/.test(n) ? 'laptop' : /tab|ipad/.test(n) ? 'tablet' : /phone|pixel/.test(n) ? 'phone' : 'desktop';
+const now = () => { const d = new Date(); return String(d.getHours()).padStart(2,'0') + ':' + String(d.getMinutes()).padStart(2,'0'); };
+const fmtSize = s => s < 1 ? Math.max(1, Math.round(s * 1024)) + ' KB' : s.toFixed(1) + ' MB';
+const previewOf = m => m.type === 'text' ? m.text : m.type === 'file' ? m.file.name : 'Photo · ' + m.image.name;
+
+class Component extends DCLogic {
+  rootRef = React.createRef();
+  scrollRef = React.createRef();
+  timers = [];
+  state = this.initState();
+
+  initState() {
+    const s = this.props.screen || 'devices';
+    const a = this.props.addState || 'idle';
+    const screen = { devices:'devices', 'empty-devices':'devices', chat:'chat', menu:'chat', info:'chat', 'empty-chat':'chat', add:'add', notif:'notif' }[s] || 'devices';
+    return {
+      screen,
+      devices: s === 'empty-devices' ? [] : DEVICES.map(d => ({ ...d })),
+      msgs: JSON.parse(JSON.stringify(MSGS)),
+      active: s === 'empty-chat' ? 'ipad' : 'thinkpad',
+      menuFor: s === 'menu' ? 'm3' : null, moreEmoji: false,
+      sheet: s === 'info', reply: null, draft: '',
+      addName: { searching:'media-server', found:'media-server', failed:'nas-box' }[a] || '', addState: s === 'add' ? a : 'idle',
+      toast: null, nReply: s === 'notif' ? 'n1' : null, nDraft: '', nSent: {}, nRead: {}
+    };
+  }
+  applyTheme() {
+    const el = this.rootRef.current; if (!el) return;
+    const t = THEMES[this.props.theme] || THEMES.dark;
+    Object.entries(t).forEach(([k, v]) => el.style.setProperty('--' + k, v));
+  }
+  scrollBottom() { const el = this.scrollRef.current; if (el) el.scrollTop = el.scrollHeight; }
+  componentDidMount() { this.applyTheme(); this.scrollBottom(); }
+  componentDidUpdate(pp, ps) {
+    if (pp.theme !== this.props.theme) this.applyTheme();
+    const len = s => (s.msgs[s.active] || []).length;
+    if (len(ps) !== len(this.state) || ps.screen !== this.state.screen || ps.active !== this.state.active) this.scrollBottom();
+  }
+  componentWillUnmount() { this.timers.forEach(t => { clearTimeout(t); clearInterval(t); }); }
+
+  toastMsg(t) { clearTimeout(this.tt); this.setState({ toast: t }); this.tt = setTimeout(() => this.setState({ toast: null }), 1600); }
+  dev() { return this.state.devices.find(d => d.id === this.state.active) || DEVICES.find(d => d.id === this.state.active); }
+  updateMsgs(devId, fn) { this.setState(s => ({ msgs: { ...s.msgs, [devId]: fn(s.msgs[devId] || []) } })); }
+  pushMsg(m) {
+    const dev = this.state.active;
+    const msg = { id: 'n' + Date.now() + Math.random().toString(36).slice(2, 5), time: now(), ...m };
+    this.updateMsgs(dev, l => [...l, msg]);
+    this.setState(s => ({ devices: s.devices.map(d => d.id === dev ? { ...d, listTime: null } : d) }));
+    return msg;
+  }
+  send = () => {
+    const t = this.state.draft.trim(); if (!t) return;
+    this.pushMsg({ from:'me', type:'text', text:t, replyTo: this.state.reply || undefined });
+    this.setState({ draft:'', reply:null });
+  };
+  attach = () => {
+    const f = ATTACH[(this.ai = ((this.ai ?? -1) + 1) % ATTACH.length)];
+    const dev = this.state.active;
+    const m = this.pushMsg({ from:'me', type:'file', file:{ ...f }, progress:0, replyTo: this.state.reply || undefined });
+    this.setState({ reply:null });
+    const iv = setInterval(() => {
+      let done = false;
+      this.updateMsgs(dev, l => l.map(x => { if (x.id !== m.id) return x; const p = Math.min(100, x.progress + 6 + Math.random() * 8); if (p >= 100) done = true; return { ...x, progress: p }; }));
+      if (done) clearInterval(iv);
+    }, 140);
+    this.timers.push(iv);
+  };
+  openMenu(id) { this.lp = true; this.setState({ menuFor: id, moreEmoji: false }); }
+  react(id, e) {
+    this.updateMsgs(this.state.active, l => l.map(m => {
+      if (m.id !== id) return m;
+      let rs = (m.reactions || []).map(r => ({ ...r }));
+      const r = rs.find(r => r.e === e);
+      if (r && r.mine) { r.n--; r.mine = false; rs = rs.filter(x => x.n > 0); }
+      else if (r) { r.n++; r.mine = true; }
+      else rs.push({ e, n: 1, mine: true });
+      return { ...m, reactions: rs };
+    }));
+  }
+  menuMsg() { return (this.state.msgs[this.state.active] || []).find(m => m.id === this.state.menuFor); }
+  connect = () => {
+    const n = this.state.addName.trim().toLowerCase(); if (!n || this.state.addState === 'searching') return;
+    this.setState({ addState:'searching', addName:n });
+    const t = setTimeout(() => this.setState({ addState: KNOWN.includes(n) && !this.state.devices.find(d => d.id === n) ? 'found' : 'failed' }), 1500);
+    this.timers.push(t);
+  };
+  addFound = () => {
+    const n = this.state.addName;
+    this.setState(s => ({ devices: [{ id:n, name:n, kind:kindFor(n), online:true, seen:'', addr:'100.92.18.44', listTime:'' }, ...s.devices], msgs: { ...s.msgs, [n]: [] }, screen:'devices', addState:'idle', addName:'' }));
+    this.toastMsg(n + ' added');
+  };
+  nSend(id) { const t = this.state.nDraft.trim() || 'On my way'; this.setState(s => ({ nSent: { ...s.nSent, [id]: 'You: ' + t }, nReply: null, nDraft: '' })); }
+  notif(id) {
+    const s = this.state, sent = s.nSent[id], read = s.nRead[id];
+    return {
+      actions: !sent && !read && s.nReply !== id, replying: s.nReply === id, sent: !!sent || !!read, sentText: sent || 'Marked as read',
+      openReply: () => this.setState({ nReply: id, nDraft: '' }),
+      markRead: () => this.setState(st => ({ nRead: { ...st.nRead, [id]: true } })),
+      openFile: () => this.toastMsg('Opening talk-final.pdf'),
+      send: () => this.nSend(id),
+      onKey: e => { if (e.key === 'Enter') this.nSend(id); }
+    };
+  }
+
+  renderVals() {
+    const s = this.state;
+    const d = this.dev() || DEVICES[0];
+    const dev = { ...d, iconD: ICON[d.kind], status: d.online ? 'Online' : d.seen, host: d.id + '.' + TAIL };
+    const list = s.msgs[s.active] || [];
+    const msgs = list.map(m => {
+      const mine = m.from === 'me';
+      const isFile = m.type === 'file';
+      const sending = isFile && m.progress < 100;
+      const p = Math.round(m.progress || 0);
+      return {
+        ...m, isText: m.type === 'text', isFile, isImage: m.type === 'image', sending, hasReply: !!m.replyTo,
+        align: mine ? 'flex-end' : 'flex-start',
+        bg: mine ? 'var(--accent)' : 'var(--surface2)', fg: mine ? 'var(--onAccent)' : 'var(--text)', sub: mine ? 'var(--onAccentSub)' : 'var(--text2)',
+        quoteBg: mine ? 'var(--quoteMine)' : 'var(--quoteTheirs)', tileBg: mine ? 'var(--quoteMine)' : 'var(--quoteTheirs)',
+        radius: mine ? '20px 20px 6px 20px' : '20px 20px 20px 6px',
+        pad: m.type === 'image' ? '4px' : isFile ? '10px 12px' : '10px 16px',
+        pct: p + '%',
+        sizeLabel: isFile ? (sending ? fmtSize(m.file.size * p / 100) + ' of ' + fmtSize(m.file.size) : m.file.ext.toUpperCase() + ' · ' + fmtSize(m.file.size)) : '',
+        meta: sending ? 'Sending · ' + p + '%' : m.time,
+        reacts: (m.reactions || []).map(r => ({ label: r.n > 1 ? r.e + ' ' + r.n : r.e, border: r.mine ? 'var(--text2)' : 'var(--line)', toggle: () => this.react(m.id, r.e) })),
+        onDown: () => { this.lp = false; clearTimeout(this.lpT); this.lpT = setTimeout(() => this.openMenu(m.id), 420); },
+        onUp: () => clearTimeout(this.lpT),
+        onContext: e => { e.preventDefault(); clearTimeout(this.lpT); this.openMenu(m.id); },
+        onTap: () => { if (this.lp) { this.lp = false; return; } if (m.type === 'image') this.toastMsg('Opening ' + m.image.name); else if (isFile && !sending) this.toastMsg('Opening ' + m.file.name); }
+      };
+    });
+    const mm = this.menuMsg();
+    const mmMine = mm && mm.from === 'me';
+    const deviceRows = s.devices.map(x => {
+      const l = s.msgs[x.id] || [], last = l[l.length - 1];
+      return { ...x, offline: !x.online, iconD: ICON[x.kind],
+        preview: last ? (last.from === 'me' ? 'You: ' : '') + previewOf(last) : 'No messages yet',
+        time: x.listTime != null ? x.listTime : (last ? last.time : ''),
+        open: () => this.setState({ screen:'chat', active:x.id, reply:null, draft:'' }) };
+    });
+    const found = { name: s.addName, iconD: ICON[kindFor(s.addName)], addr: '100.92.18.44', host: s.addName + '.' + TAIL };
+    const pickE = e => ({ e, bg: mm && (mm.reactions || []).some(r => r.e === e && r.mine) ? 'var(--surface2)' : 'none', pick: () => { this.react(s.menuFor, e); this.setState({ menuFor:null }); } });
+    return {
+      rootRef: this.rootRef, scrollRef: this.scrollRef,
+      screenLabel: this.props.screen || 'devices',
+      isDevices: s.screen === 'devices', isChat: s.screen === 'chat', isAdd: s.screen === 'add', isNotif: s.screen === 'notif',
+      navBg: s.screen === 'notif' ? 'var(--shade)' : 'var(--bg)',
+      hasDevices: s.devices.length > 0, noDevices: s.devices.length === 0, deviceRows,
+      goAdd: () => this.setState({ screen:'add', addState:'idle', addName:'' }),
+      goDevices: () => this.setState({ screen:'devices', sheet:false, menuFor:null }),
+      dev, msgs, hasMsgs: list.length > 0, noMsgs: list.length === 0,
+      emptyChatBody: 'Messages and files you send to ' + d.name + ' will appear here.' + (d.online ? '' : ' It will get them when it’s back online.'),
+      openSheet: () => this.setState({ sheet:true }), closeSheet: () => this.setState({ sheet:false }), sheetOpen: s.sheet && s.screen === 'chat',
+      draft: s.draft, onDraft: e => this.setState({ draft: e.target.value }), onKey: e => { if (e.key === 'Enter') this.send(); },
+      inputPh: 'Message ' + d.name, send: this.send, attach: this.attach,
+      reply: s.reply || { who:'', text:'' }, hasReplyDraft: !!s.reply && s.screen === 'chat', clearReply: () => this.setState({ reply:null }),
+      menuOpen: !!mm && s.screen === 'chat', closeMenu: () => this.setState({ menuFor:null }), stop: e => e.stopPropagation(),
+      menu: mm ? { align: mmMine ? 'flex-end' : 'flex-start', bg: mmMine ? 'var(--accent)' : 'var(--surface2)', fg: mmMine ? 'var(--onAccent)' : 'var(--text)', radius: mmMine ? '20px 20px 6px 20px' : '20px 20px 20px 6px', preview: previewOf(mm) } : {},
+      emojis: QUICK.map(pickE), moreEmojis: MORE.map(pickE), moreEmoji: s.moreEmoji,
+      toggleMore: () => this.setState(st => ({ moreEmoji: !st.moreEmoji })),
+      doReply: () => this.setState({ reply: { who: mmMine ? 'You' : d.name, text: previewOf(mm) }, menuFor:null }),
+      doCopy: () => { try { navigator.clipboard && navigator.clipboard.writeText(previewOf(mm)); } catch (e) {} this.setState({ menuFor:null }); this.toastMsg('Copied'); },
+      doDelete: () => { const id = s.menuFor; this.updateMsgs(s.active, l => l.filter(m => m.id !== id)); this.setState({ menuFor:null }); this.toastMsg('Message deleted'); },
+      addName: s.addName, onAddName: e => this.setState({ addName: e.target.value, addState: s.addState === 'searching' ? 'searching' : 'idle' }),
+      onAddKey: e => { if (e.key === 'Enter') this.connect(); },
+      connect: this.connect, addFound: this.addFound, found,
+      connectOpacity: s.addState === 'searching' || !s.addName.trim() ? '0.4' : '1',
+      fieldBorder: s.addState === 'failed' ? 'var(--text2)' : 'var(--line)',
+      isSearching: s.addState === 'searching', isFound: s.addState === 'found', isFailed: s.addState === 'failed',
+      spinner: React.createElement('span', { style: { width:24, height:24, flex:'none', borderRadius:'50%', border:'2px solid var(--line)', borderTopColor:'var(--text)', animation:'mp-spin .8s linear infinite' } }),
+      n1: this.notif('n1'), n2: this.notif('n2'), nDraft: s.nDraft, onNDraft: e => this.setState({ nDraft: e.target.value }),
+      toast: s.toast, hasToast: !!s.toast
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+group 'dev.kanan.phone_native'
+version '1.0'
+
+buildscript {
+    repositories { google(); mavenCentral() }
+}
+
+apply plugin: 'com.android.library'
+
+android {
+    namespace 'dev.kanan.phone_native'
+    compileSdk 35
+    defaultConfig { minSdk 24 }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+}
+
+kotlin {
+    compilerOptions {
+        jvmTarget = org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17
+    }
+}

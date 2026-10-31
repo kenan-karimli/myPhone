@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="control_description">Lets your own PC control this phone while you are sharing the screen with it from myPhone: taps, swipes, Back/Home and typing. Nothing happens unless you start screen sharing.</string>
+</resources>
