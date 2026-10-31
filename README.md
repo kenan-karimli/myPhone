@@ -3,10 +3,11 @@
 **A private, cross-device companion for Android and desktop.** Chat with your own devices, move files and clipboard content between them, view screens remotely, and interact with your Android phone from your computer — over your private Tailscale network.
 
 <p align="center">
-  <video src="https://i.imgur.com/BMwoIvc.mp4" controls playsinline width="100%">
-    Your browser does not support embedded video.
-    <a href="https://i.imgur.com/BMwoIvc.mp4">Watch the myPhone demo</a>
-  </video>
+  <a href="https://i.imgur.com/BMwoIvc.mp4">
+    <img src="https://raw.githubusercontent.com/kenan-karimli/myPhone/main/app/test/goldens/phone_chat_dark.png" alt="Watch the myPhone demo" width="850">
+  </a>
+  <br>
+  <a href="https://i.imgur.com/BMwoIvc.mp4"><strong>▶ Watch the full myPhone demo</strong></a>
 </p>
 
 <p align="center">
